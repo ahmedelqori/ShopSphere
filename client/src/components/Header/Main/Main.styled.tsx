@@ -55,11 +55,31 @@ export const User = styled.div`
 `;
 
 export const Cart = styled.div`
+  width: 32px;
+  height: 32px;
   position: relative;
 `;
+
+export const TotalItems = styled.div`
+  position: absolute;
+  background-color: var(--color-white);
+  color: var(--color-blue-dark);
+  width: 25px;
+  height: 25px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  top: -8px;
+  right: -10px;
+  cursor: pointer;
+`;
 export const Favorite = styled.div`
+  width: 32px;
+  height: 32px;
   position: relative;
 `;
 export const Profile = styled.div`
+  width: 32px;
+  height: 32px;
   position: relative;
 `;

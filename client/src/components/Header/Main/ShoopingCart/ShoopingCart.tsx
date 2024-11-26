@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import {
   Cart,
   H3,
@@ -15,45 +16,26 @@ import {
   Buttons,
 } from "./ShoopingCart.styled";
 
+import { ItemInterface } from "../Main";
+
 type ShoppingCartProps = {
   style?: React.CSSProperties;
+  items: ItemInterface[];
+  setItems: React.Dispatch<React.SetStateAction<ItemInterface[]>>;
 };
 
-type ItemInterface = {
-  title: string;
-  price: number;
-  count: number;
-  img: string;
-};
-
-const ShoppingCart: React.FC<ShoppingCartProps> = ({ style }) => {
-  const itemObj: ItemInterface = {
-    title: "Canon EOS 1500D DSLR Camera Body+ 18-55 mm",
-    price: 1500,
-    count: 1,
-    img: "/assets/icons/Item.png",
-  };
-
-  const itemObj1: ItemInterface = {
-    title: "Canon EOS 1500D DSLR Camera Body+ 18-55 mm",
-    price: 1500,
-    count: 5,
-    img: "/assets/icons/Item.png",
-  };
-  const [items, setItems] = useState<ItemInterface[]>([
-    itemObj,
-    itemObj1,
-    itemObj,
-    itemObj,
-    itemObj,
-  ]);
+const ShoppingCart: React.FC<ShoppingCartProps> = ({
+  style,
+  items,
+  setItems,
+}) => {
   const [total, setTotal] = useState<number>(0);
   const handleRemove = (index: number): void => {
     setItems((prevItems) => prevItems.filter((_, i) => i !== index));
   };
 
   useEffect(() => {
-    const newTotal = items.reduce(
+    const newTotal: number = items.reduce(
       (acc, item) => acc + item.price * item.count,
       0
     );
@@ -71,7 +53,10 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ style }) => {
               <Li key={index}>
                 <ItemImage className="item" src={item.img} alt="item" />
                 <InfoContainer>
-                  <H4>{item.title}</H4>
+                  <H4>
+                    {item.title.substring(0, 48)}
+                    {item.title.length > 48 ? "..." : ""}
+                  </H4>
                   <PriceContainer>
                     <p>{item.count} x </p>
                     <span>${item.price}</span>

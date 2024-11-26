@@ -8,11 +8,13 @@ export const Cart = styled.div`
   font-size: 0.9rem;
   position: absolute;
   align-items: start;
-  border-radius: 2px;
+  border-radius: 4px;
   flex-direction: column;
   color: var(--color-grey);
   background-color: var(--color-white);
   border: 1px solid var(--color-white-light);
+  padding: 15px 0;
+
 `;
 
 export const H3 = styled.h3`
