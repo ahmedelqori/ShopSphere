@@ -14,7 +14,6 @@ export const Cart = styled.div`
   background-color: var(--color-white);
   border: 1px solid var(--color-white-light);
   padding: 15px 0;
-
 `;
 
 export const H3 = styled.h3`
@@ -42,6 +41,8 @@ export const H4 = styled.h4`
 `;
 
 export const ItemImage = styled.img`
+  width: 80px;
+  height: 80px;
   border-radius: 2px;
 `;
 export const InfoContainer = styled.div`

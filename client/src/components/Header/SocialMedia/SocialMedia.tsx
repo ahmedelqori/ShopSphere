@@ -52,7 +52,7 @@ const SocialMedia: React.FC = () => {
   return (
     <Section>
       <Container className="container">
-        <LeftSide>Welcome to Meedivo online eCommerce store. </LeftSide>
+        <LeftSide>Welcome to Meedivo online store. </LeftSide>
         <RightSide >
           <SocialMediaContainer >
             <p>Follow us:</p>

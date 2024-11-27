@@ -14,7 +14,7 @@ export const Container = styled.div`
 
 export const LeftSide = styled.div`
   font-size: 0.9rem;
-  @media (width <= 532px) {
+  @media (width <= 768px) {
     display: none;
   }
 `;
@@ -23,11 +23,11 @@ export const RightSide = styled.div`
   gap: 3rem;
   align-items: center;
   p {
-    @media (width <= 532px) {
+    @media (width <= 768px) {
       display: none;
     }
   }
-  @media (width <= 532px) {
+  @media (width <= 768px) {
     gap: 0;
     flex: 1;
     justify-content: space-between;
