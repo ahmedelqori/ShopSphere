@@ -16,7 +16,6 @@
   --color-blue-dark: #1b6392;
   --color-blue-light: #2da5f3;
   --color-orange: #fa8232;
-
 }
 
 body {
@@ -57,55 +56,4 @@ img {
 }
 
 /* =============================================== */
-/* .main {
-  width: 100%;
-  background-color: var(--color-blue-dark);
-  height: 88px;
-  padding: 0 5px;
-  display: flex;
-  align-items: center;
-}
 
-.main .container {
-  align-items: center;
-  justify-content: space-between;
-  gap: 5rem;
-  border-radius: 2px;
-}
-.main .container .logo a {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  color: var(--color-white);
-}
-.main .container .logo span {
-  font-size: 32px;
-  font-weight: 700;
-}
-
-.main .container .search {
-  height: 48px;
-  background-color: var(--color-white);
-  border-radius: 2px;
-  padding: 10px 10px;
-  flex-shrink: 2;
-  justify-content: space-between;
-  flex: 1;
-}
-.main .container .search input {
-  border: none;
-  outline: none;
-  color: var(--color-grey-sky);
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.user {
-  justify-content: space-between;
-  gap: 1.5em;
-}
-
-.user .cart {
-  position: relative;
-}
- */

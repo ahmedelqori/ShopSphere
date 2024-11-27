@@ -28,6 +28,7 @@ const SocialMedia = () => {
   const [language, setLanguage] = useState("ENG");
   const [hideDownMenuLanguage, setHideDownMenuLanguage] = useState(true);
   const [hideDownMenuCurrency, setHideDownMenuCurrency] = useState(true);
+  
   return (
     <Section>
       <Container className="container">

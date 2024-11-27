@@ -11,6 +11,7 @@ import {
   TotalItems,
 } from "./Main.styled";
 import { useState } from "react";
+import ProfileMenu from "./Profile/ProfileMenu";
 
 export type ItemInterface = {
   title: string;
@@ -28,12 +29,12 @@ const Main = () => {
   };
 
   const itemObj1: ItemInterface = {
-    title:
-      "Canon EOS 1500D DSLR Camera Body+ 18-55",
+    title: "Canon EOS 1500D DSLR Camera Body+ 18-55",
     price: 1500,
     count: 5,
     img: "/assets/icons/Item.png",
   };
+
   const [items, setItems] = useState<ItemInterface[]>([
     itemObj,
     itemObj1,
@@ -84,6 +85,7 @@ const Main = () => {
               src="/assets/icons/User.svg"
               onClick={() => setShowProfile(!showProfile)}
             />
+            <ProfileMenu style={{ display: showProfile ? "flex" : "none" }} />
           </Profile>
         </User>
       </Container>
