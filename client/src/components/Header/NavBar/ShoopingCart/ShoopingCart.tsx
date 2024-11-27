@@ -16,7 +16,7 @@ import {
   Buttons,
 } from "./ShoopingCart.styled";
 
-import { ItemInterface } from "../Main";
+import { ItemInterface } from "../NavBar";
 
 type ShoppingCartProps = {
   style?: React.CSSProperties;
