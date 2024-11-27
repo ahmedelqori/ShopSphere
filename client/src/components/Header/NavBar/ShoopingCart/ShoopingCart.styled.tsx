@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Cart = styled.div`
@@ -29,10 +30,13 @@ export const Ul = styled.ul`
   padding: 10px 20px;
 `;
 
-export const Li = styled.li`
+export const Li = styled.li``;
+
+export const LinkContainer = styled(Link)`
   gap: 10px;
   display: flex;
   justify-content: space-between;
+  text-decoration: none;
 `;
 
 export const H4 = styled.h4`
@@ -71,6 +75,9 @@ export const ShowMore = styled.div`
   cursor: pointer;
   color: var(--color-grey-light);
   font-weight: 500;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 export const Line = styled.div`
@@ -102,6 +109,14 @@ export const Buttons = styled.div`
     color: var(--color-white);
     border: none;
     background-color: var(--color-orange);
+    &:hover {
+      opacity: 0.9;
+    }
+    &:hover:last-child {
+      border: none;
+      background-color: var(--color-orange);
+      color: var(--color-white);
+    }
     &:last-child {
       color: var(--color-orange);
       border: 1px solid var(--color-orange);

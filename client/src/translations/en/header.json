@@ -1,0 +1,40 @@
+{
+  "notification_bar": {
+    "promotion": {
+      "first": "up",
+      "last": "off"
+    },
+    "button": "shop now"
+  },
+  "social_media_bar": {
+    "welcome": "Welcome to Meedivo online store",
+    "follow": "Follow us"
+  },
+  "navbar": {
+    "input": "Search for anything...",
+    "cart": {
+      "h3": "Shopping Cart:",
+      "empty": "Empty List",
+      "more": "Show More",
+      "total": "Sub-Total:",
+      "checkout": "CHECKOUT NOT",
+      "view": "VIEW CART"
+    },
+    "profile": {
+      "signin": "Sign in to your account",
+      "email": "Email Address",
+      "password": "Password",
+      "forget_password": "Forget Password?",
+      "show_password": "Show password",
+      "login": "LOGIN",
+      "no_account": "Don’t have an account?",
+      "create_account": "CREATE ACCOUNT"
+    },
+    "hide_profile": {
+      "signin": "Sign in",
+      "signup": "Sign up",
+      "cart": "Cart",
+      "favorite": "Favorite"
+    }
+  }
+}

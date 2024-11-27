@@ -46,6 +46,9 @@ export const Form = styled.form`
   }
   a {
     color: var(--color-blue-light);
+    &:hover {
+      opacity: 0.8;
+    }
   }
   button {
     width: 360px;
@@ -57,6 +60,9 @@ export const Form = styled.form`
     margin-bottom: 20px;
     background-color: var(--color-orange);
     outline: 1px solid var(--color-orange);
+    &:hover {
+      opacity: 0.8;
+    }
   }
 `;
 
@@ -79,15 +85,21 @@ export const Buttons = styled.div`
     color: var(--color-orange);
     background-color: var(--color-white);
   }
+  button {
+    &:last-child:hover {
+      color: var(--color-white);
+      background-color: var(--color-orange);
+    }
+  }
   p {
     opacity: 1;
     position: relative;
     &::before {
       content: "";
       top: 50%;
-      left: -75%;
+      left: -108px;
       height: 1px;
-      width: 100px;
+      width: 80px;
       opacity: 0.5;
       position: absolute;
       background-color: var(--color-grey-light);
@@ -96,12 +108,11 @@ export const Buttons = styled.div`
       content: "";
       top: 50%;
       height: 1px;
-      right: -75%;
-      width: 100px;
+      right: -108px;
+      width: 80px;
       opacity: 0.5;
       position: absolute;
       background-color: var(--color-grey-light);
     }
   }
 `;
-

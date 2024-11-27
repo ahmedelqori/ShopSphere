@@ -27,6 +27,7 @@ body {
 a {
   text-decoration: none;
   cursor: pointer;
+  color: black;
 }
 
 button {
@@ -59,13 +60,3 @@ img {
 
 /* =============================================== */
 
-.mobile-bar {
-  display: none;
-}
-
-@media (width <= 768px) {
-  .mobile-bar
-  {
-    display: inline;
-  }
-}

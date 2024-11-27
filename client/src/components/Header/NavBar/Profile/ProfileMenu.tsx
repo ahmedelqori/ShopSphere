@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { ContainerForm, Form, Password, Buttons } from "./ProfileMenu.styled";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface ProfileMenuProps {
   style?: React.CSSProperties;
@@ -10,6 +11,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPasssword] = useState<Boolean>(false);
+  const [Content, _] = useTranslation("header");
 
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
@@ -17,9 +19,9 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
   return (
     <ContainerForm style={style}>
       <Form onSubmit={(e: React.SyntheticEvent) => handleSubmit(e)}>
-        <h3>Sign in to your account</h3>
+        <h3>{Content("navbar.profile.signin")}</h3>
         <div>
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="email">{Content("navbar.profile.email")}</label>
           <input
             type="text"
             name="email"
@@ -31,8 +33,10 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
         </div>
         <div>
           <label htmlFor="password">
-            <span>Password</span>
-            <a href="/forget-password">Forget Password?</a>
+            <span>{Content("navbar.profile.password")}</span>
+            <a href="/forget-password">
+              {Content("navbar.profile.forget_password")}
+            </a>
           </label>
           <Password>
             <input
@@ -52,10 +56,10 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
           </Password>
         </div>
         <Buttons>
-          <button type="submit">LOGIN</button>
-          <p>Don’t have account</p>
+          <button type="submit">{Content("navbar.profile.login")}</button>
+          <p>{Content("navbar.profile.no_account")}</p>
           <Link to={"/login"}>
-            <button>CREATE ACCOUNT</button>
+            <button>{Content("navbar.profile.create_account")}</button>
           </Link>
         </Buttons>
       </Form>

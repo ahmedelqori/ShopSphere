@@ -45,6 +45,9 @@ export const LinksContainer = styled.div`
   gap: 1rem;
   img {
     padding-top: 5px;
+    &:hover {
+      margin-bottom: 5px;
+    }
   }
   @media (width <= 392px) {
     display: none;
