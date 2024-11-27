@@ -22,7 +22,7 @@ const SocialMedia: React.FC = () => {
     "Instagram",
   ];
   const currencies = ["MAD", "USD"];
-  const languages = ["ENG", "FR", "AR", "IN"];
+  const languages = ["ENG", "FR", "AR"];
 
   const [currency, setCurrency] = useState<string>("USD");
   const [language, setLanguage] = useState<string>("ENG");
@@ -53,8 +53,8 @@ const SocialMedia: React.FC = () => {
     <Section>
       <Container className="container">
         <LeftSide>Welcome to Meedivo online eCommerce store. </LeftSide>
-        <RightSide className="con1">
-          <SocialMediaContainer className="social">
+        <RightSide >
+          <SocialMediaContainer >
             <p>Follow us:</p>
             <LinksContainer>
               {socialMedia.map((e: string, index: number) => {

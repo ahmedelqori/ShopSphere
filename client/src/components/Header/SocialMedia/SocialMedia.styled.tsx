@@ -5,7 +5,6 @@ export const Section = styled.section`
   height: 52px;
   display: flex;
   padding: 0 5px;
-  align-items: center;
   background-color: var(--color-blue-dark);
 `;
 
@@ -44,6 +43,9 @@ export const SocialMediaContainer = styled.div`
 
 export const LinksContainer = styled.div`
   gap: 1rem;
+  img {
+    padding-top: 5px;
+  }
   @media (width <= 392px) {
     display: none;
   }

@@ -54,10 +54,11 @@ const NavBar: React.FC = () => {
   const [width, setWidth] = useState<number>(window.innerWidth);
   const [searchContent, setSearchContent] = useState<string>("");
 
-  const [cartRef, profileRef, menuRef] = [
+  const [cartRef, profileRef, menuRef, searchRef] = [
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
+    useRef<HTMLInputElement>(null),
   ];
 
   useEffect(() => {
@@ -66,7 +67,6 @@ const NavBar: React.FC = () => {
 
     const handleCloseitems = (e: any) => {
       if (!cartRef.current?.contains(e.target as Node)) setShowCart(false);
-
       if (!profileRef.current?.contains(e.target as Node))
         setShowProfile(false);
       if (!menuRef.current?.contains(e.target as Node)) setShowDropDown(false);
@@ -91,6 +91,7 @@ const NavBar: React.FC = () => {
           style={{ display: showSearchBar || width > 768 ? "flex" : "none" }}
         >
           <input
+            ref={searchRef}
             type="text"
             placeholder="Search for anything..."
             value={searchContent}
@@ -110,6 +111,10 @@ const NavBar: React.FC = () => {
             onClick={() => {
               if (showDorpDow === false) setSearchContent("");
               setShowSearchBar(!showSearchBar);
+              if (showDorpDow == false)
+                setTimeout(() => {
+                  searchRef.current?.focus();
+                }, 0);
             }}
           />
           <Menu ref={menuRef}>
