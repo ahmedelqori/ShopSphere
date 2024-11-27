@@ -9,9 +9,11 @@ import {
   RightSideButton,
   CloseButton,
 } from "./NotificationBar.styled";
+import { useTranslation } from "react-i18next";
 
 const NotificationBar = () => {
   const [isClose, setIsClose] = useState(false);
+  const [Content] = useTranslation("header");
 
   return (
     <Section style={{ display: isClose ? "none" : "flex" }}>
@@ -21,12 +23,13 @@ const NotificationBar = () => {
           Friday
         </LeftSide>
         <CenterField>
-          Up to
+          {Content("notification_bar.promotion.first")}
           <CenterFieldSpan>59%</CenterFieldSpan>
-          OFF
+          {Content("notification_bar.promotion.last").toUpperCase()}
         </CenterField>
         <RightSideButton>
-          SHOP NOW <img src="/assets/icons/ArrowRight.svg" />
+          {Content("notification_bar.button").toUpperCase()}
+          <img src="/assets/icons/ArrowRight.svg" />
         </RightSideButton>
       </BarContainer>
       <CloseButton onClick={() => setIsClose(true)}>X</CloseButton>

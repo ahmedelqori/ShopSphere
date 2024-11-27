@@ -94,11 +94,13 @@ export const HideMenu = styled.div`
   right: 10%;
   z-index: 3;
   display: flex;
+  width: fit-content;
   border-radius: 5px;
   padding: 10px 40px;
   position: absolute;
   width: fit-content;
   height: fit-content;
+  text-align: center;
   background-color: var(--color-orange);
   a {
     color: var(--color-white);
@@ -109,6 +111,7 @@ export const HideMenu = styled.div`
   }
   li {
     padding: 10px 0;
+    width: 100px;
     position: relative;
     &:hover {
       opacity: 0.5;
@@ -117,9 +120,9 @@ export const HideMenu = styled.div`
       &::after {
         content: "";
         top: 100%;
-        left: -65%;
+        left: -40%;
         height: 1px;
-        width: 230%;
+        width: 180%;
         position: absolute;
         background-color: var(--color-white-light);
       }
@@ -137,6 +140,9 @@ export const Cart = styled.div`
   @media (width <= 768px) {
     display: none;
   }
+  &:hover {
+    margin-bottom: 5px;
+  }
 `;
 
 export const TotalItems = styled.div`
@@ -151,6 +157,7 @@ export const TotalItems = styled.div`
   justify-content: center;
   color: var(--color-blue-dark);
   background-color: var(--color-white);
+
 `;
 export const Favorite = styled.div`
   width: 32px;
@@ -159,6 +166,9 @@ export const Favorite = styled.div`
   @media (width <= 768px) {
     display: none;
   }
+  &:hover {
+    margin-bottom: 5px;
+  }
 `;
 export const Profile = styled.div`
   width: 32px;
@@ -166,5 +176,8 @@ export const Profile = styled.div`
   position: relative;
   @media (width <= 768px) {
     display: none;
+  }
+  &:hover {
+    margin-bottom: 5px;
   }
 `;

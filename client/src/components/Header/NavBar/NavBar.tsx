@@ -16,6 +16,7 @@ import {
 import { useState, useEffect, ChangeEvent, useRef } from "react";
 import ProfileMenu from "./Profile/ProfileMenu";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 export type ItemInterface = {
   title: string;
   price: number;
@@ -61,6 +62,8 @@ const NavBar: React.FC = () => {
     useRef<HTMLInputElement>(null),
   ];
 
+  const [Content, i18n] = useTranslation("header");
+
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -93,7 +96,7 @@ const NavBar: React.FC = () => {
           <input
             ref={searchRef}
             type="text"
-            placeholder="Search for anything..."
+            placeholder={Content("navbar.input")}
             value={searchContent}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setSearchContent(e.target.value)
@@ -133,16 +136,20 @@ const NavBar: React.FC = () => {
             <HideMenu style={{ display: showDorpDow ? "flex" : "none" }}>
               <ul>
                 <li>
-                  <Link to={"/login"}>Sign in</Link>
+                  <Link to={"/login"}>
+                    {Content("navbar.hide_profile.signin")}
+                  </Link>
                 </li>
                 <li>
-                  <Link to={"/login"}>Sign up</Link>
+                  <Link to={"/login"}>
+                    {Content("navbar.hide_profile.signup")}
+                  </Link>
                 </li>
                 <li>
-                  <Link to={"/"}>Cart</Link>
+                  <Link to={"/"}>{Content("navbar.hide_profile.cart")}</Link>
                 </li>
                 <li>
-                  <Link to={"/"}>Favorite</Link>
+                  <Link to={"/"}>{Content("navbar.hide_profile.favorite")}</Link>
                 </li>
               </ul>
             </HideMenu>

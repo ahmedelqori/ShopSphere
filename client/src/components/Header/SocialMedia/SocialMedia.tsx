@@ -12,6 +12,7 @@ import {
   OptionContainer,
   LinksContainer,
 } from "./SocialMedia.styled";
+import { useTranslation } from "react-i18next";
 const SocialMedia: React.FC = () => {
   const socialMedia: string[] = [
     "Twitter",
@@ -22,10 +23,10 @@ const SocialMedia: React.FC = () => {
     "Instagram",
   ];
   const currencies = ["MAD", "USD"];
-  const languages = ["ENG", "FR", "AR"];
+  const languages = ["en", "fr"];
 
   const [currency, setCurrency] = useState<string>("USD");
-  const [language, setLanguage] = useState<string>("ENG");
+  const [language, setLanguage] = useState<string>("en");
   const [hideDownMenuLanguage, setHideDownMenuLanguage] =
     useState<boolean>(true);
   const [hideDownMenuCurrency, setHideDownMenuCurrency] =
@@ -35,6 +36,11 @@ const SocialMedia: React.FC = () => {
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
   ];
+
+  const [Content, i18n] = useTranslation("header");
+  const handleChangeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+  };
 
   useEffect(() => {
     const handleCloseMenu = (event: MouseEvent) => {
@@ -52,10 +58,10 @@ const SocialMedia: React.FC = () => {
   return (
     <Section>
       <Container className="container">
-        <LeftSide>Welcome to Meedivo online store. </LeftSide>
-        <RightSide >
-          <SocialMediaContainer >
-            <p>Follow us:</p>
+        <LeftSide>{Content("social_media_bar.welcome")}.</LeftSide>
+        <RightSide>
+          <SocialMediaContainer>
+            <p>{Content("social_media_bar.follow")}:</p>
             <LinksContainer>
               {socialMedia.map((e: string, index: number) => {
                 return (
@@ -71,7 +77,7 @@ const SocialMedia: React.FC = () => {
               <span
                 onClick={() => setHideDownMenuLanguage(!hideDownMenuLanguage)}
               >
-                {language}
+                {language.toUpperCase()}
               </span>
               <img
                 onClick={() => setHideDownMenuLanguage(!hideDownMenuLanguage)}
@@ -85,12 +91,12 @@ const SocialMedia: React.FC = () => {
                     <List
                       key={index}
                       onClick={() => {
-                        console.log("hi");
                         setLanguage(language);
                         setHideDownMenuLanguage(true);
+                        handleChangeLanguage(language);
                       }}
                     >
-                      {language}
+                      {language.toUpperCase()}
                     </List>
                   ))}
                 </UnorderList>
@@ -100,7 +106,7 @@ const SocialMedia: React.FC = () => {
               <span
                 onClick={() => setHideDownMenuCurrency(!hideDownMenuCurrency)}
               >
-                {currency}
+                {currency.toUpperCase()}
               </span>{" "}
               <img
                 onClick={() => setHideDownMenuCurrency(!hideDownMenuCurrency)}
@@ -119,9 +125,10 @@ const SocialMedia: React.FC = () => {
                       onClick={() => {
                         setCurrency(currency);
                         setHideDownMenuCurrency(true);
+                        handleChangeLanguage(language);
                       }}
                     >
-                      {currency}
+                      {currency.toUpperCase()}
                     </List>
                   ))}
                 </UnorderList>
