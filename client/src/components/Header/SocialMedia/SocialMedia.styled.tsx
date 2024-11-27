@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const Section = styled.section`
   width: 100%;
-  background-color: var(--color-blue-dark);
   height: 52px;
-  padding: 0 5px;
   display: flex;
+  padding: 0 5px;
   align-items: center;
+  background-color: var(--color-blue-dark);
 `;
 
 export const Container = styled.div`
@@ -14,12 +14,28 @@ export const Container = styled.div`
 `;
 
 export const LeftSide = styled.div`
-  font-size: .9rem;
+  font-size: 0.9rem;
+  @media (width <= 532px) {
+    display: none;
+  }
 `;
 
 export const RightSide = styled.div`
   gap: 3rem;
   align-items: center;
+  p {
+    @media (width <= 532px) {
+      display: none;
+    }
+  }
+  @media (width <= 532px) {
+    gap: 0;
+    flex: 1;
+    justify-content: space-between;
+  }
+  @media (width <= 392px) {
+    justify-content: end;
+  }
 `;
 
 export const SocialMediaContainer = styled.div`
@@ -28,6 +44,9 @@ export const SocialMediaContainer = styled.div`
 
 export const LinksContainer = styled.div`
   gap: 1rem;
+  @media (width <= 392px) {
+    display: none;
+  }
 `;
 
 export const OptionsContainer = styled.div`
@@ -45,22 +64,23 @@ export const OptionContainer = styled.div`
 `;
 
 export const HideOptions = styled.div`
-  position: absolute;
-  background-color: var(--color-blue-light);
-  padding: 5px 10px;
-  width: 100px;
-  max-height: max-content;
-  text-align: start;
-  top: 140%;
   right: 0%;
+  top: 140%;
+  z-index: 2;
+  width: 50px;
+  padding: 5px 10px;
+  text-align: start;
+  position: absolute;
   border-radius: 3px;
+  max-height: max-content;
+  background-color: var(--color-blue-light);
 `;
 
 export const UnorderList = styled.ul`
-  display: flex;
-  flex-direction: column;
   gap: 0.5rem;
+  display: flex;
   max-height: 100px;
+  flex-direction: column;
 `;
 
 export const List = styled.li`
@@ -68,7 +88,7 @@ export const List = styled.li`
   padding-top: 4px;
   padding-bottom: 4px;
   &:hover {
-    border-bottom: 1px solid var(--color---color-blue-light);
     color: var(--color-yellow);
+    border-bottom: 1px solid var(--color-blue-light);
   }
 `;

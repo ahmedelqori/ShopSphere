@@ -28,14 +28,14 @@ const SocialMedia = () => {
   const [language, setLanguage] = useState("ENG");
   const [hideDownMenuLanguage, setHideDownMenuLanguage] = useState(true);
   const [hideDownMenuCurrency, setHideDownMenuCurrency] = useState(true);
-  
+
   return (
     <Section>
       <Container className="container">
         <LeftSide>Welcome to Meedivo online eCommerce store. </LeftSide>
         <RightSide className="con1">
           <SocialMediaContainer className="social">
-            Follow us:
+            <p>Follow us:</p>
             <LinksContainer>
               {socialMedia.map((e: string, index: number) => {
                 return (

@@ -14,6 +14,9 @@ export const Container = styled.div`
   border-radius: 2px;
   align-items: center;
   justify-content: space-between;
+  @media (width <= 768px) {
+    gap: 10px;
+  }
 `;
 
 export const Logo = styled.div`
@@ -36,50 +39,132 @@ export const Search = styled.div`
   flex: 1;
   height: 48px;
   flex-shrink: 2;
-  padding: 10px 10px;
-  border-radius: 2px;
+  border-radius: 8px;
   justify-content: space-between;
   background-color: var(--color-white);
   input {
+    width: 100%;
+    height: 100%;
     border: none;
     outline: none;
+    flex-shrink: 2;
+    padding: 0 20px;
     font-weight: 400;
     font-size: 0.9rem;
+    border-radius: 8px;
     color: var(--color-grey-sky);
+  }
+  img {
+    padding: 10px 10px;
+  }
+  @media (width <= 768px) {
+    display: none;
+  }
+`;
+
+export const HiddenSearch = styled.img`
+  color: white;
+  width: 32px;
+  height: 32px;
+  display: none;
+  @media (width <= 768px) {
+    display: inline;
   }
 `;
 
 export const User = styled.div`
-  justify-content: space-between;
   gap: 1.5em;
+  justify-content: space-between;
+`;
+
+export const Menu = styled.div`
+  display: none;
+  position: relative;
+  @media (width <= 768px) {
+    display: flex;
+  }
+  img {
+    width: 48px;
+    height: 48px;
+  }
+`;
+
+export const HideMenu = styled.div`
+  top: 150%;
+  right: 10%;
+  z-index: 3;
+  display: flex;
+  border-radius: 5px;
+  padding: 10px 40px;
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--color-orange);
+  a {
+    color: var(--color-white);
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+  }
+  li {
+    padding: 10px 0;
+    position: relative;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:not(:last-child) {
+      &::after {
+        content: "";
+        top: 100%;
+        left: -65%;
+        height: 1px;
+        width: 230%;
+        position: absolute;
+        background-color: var(--color-white-light);
+      }
+    }
+  }
+  @media (width <= 768px) {
+    display: flex;
+  }
 `;
 
 export const Cart = styled.div`
   width: 32px;
   height: 32px;
   position: relative;
+  @media (width <= 768px) {
+    display: none;
+  }
 `;
 
 export const TotalItems = styled.div`
-  position: absolute;
-  background-color: var(--color-white);
-  color: var(--color-blue-dark);
+  top: -8px;
   width: 25px;
+  right: -10px;
   height: 25px;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  top: -8px;
-  right: -10px;
-  cursor: pointer;
+  color: var(--color-blue-dark);
+  background-color: var(--color-white);
 `;
 export const Favorite = styled.div`
   width: 32px;
   height: 32px;
   position: relative;
+  @media (width <= 768px) {
+    display: none;
+  }
 `;
 export const Profile = styled.div`
   width: 32px;
   height: 32px;
   position: relative;
+  @media (width <= 768px) {
+    display: none;
+  }
 `;

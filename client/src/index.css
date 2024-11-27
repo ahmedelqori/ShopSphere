@@ -48,6 +48,8 @@ img {
   width: 100%;
   position: relative;
   justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .container {
@@ -57,3 +59,13 @@ img {
 
 /* =============================================== */
 
+.mobile-bar {
+  display: none;
+}
+
+@media (width <= 768px) {
+  .mobile-bar
+  {
+    display: inline;
+  }
+}

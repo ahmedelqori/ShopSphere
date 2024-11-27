@@ -19,6 +19,9 @@ export const CloseButton = styled.button`
 export const BarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
+  @media (width <= 392px) {
+    justify-content: center;
+  }
 `;
 
 export const LeftSide = styled.div`
@@ -39,6 +42,9 @@ export const LeftSideSpan = styled.span`
 export const CenterField = styled.div`
   gap: 0.5rem;
   align-items: center;
+  @media (width <= 532px) {
+    display: none;
+  }
 `;
 
 export const CenterFieldSpan = styled.span`
@@ -59,8 +65,10 @@ export const RightSideButton = styled.button`
   border: 1px solid black;
   background-color: var(--color-yellow);
   width: 156px;
-
   &:hover {
     color: var(--color-white);
+  }
+  @media (width <= 392px) {
+    display: none;
   }
 `;
