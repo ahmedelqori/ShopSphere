@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Section,
   Container,
@@ -12,7 +12,7 @@ import {
   OptionContainer,
   LinksContainer,
 } from "./SocialMedia.styled";
-const SocialMedia = () => {
+const SocialMedia: React.FC = () => {
   const socialMedia: string[] = [
     "Twitter",
     "Facebook",
@@ -24,10 +24,33 @@ const SocialMedia = () => {
   const currencies = ["MAD", "USD"];
   const languages = ["ENG", "FR", "AR", "IN"];
 
-  const [currency, setCurrency] = useState("USD");
-  const [language, setLanguage] = useState("ENG");
-  const [hideDownMenuLanguage, setHideDownMenuLanguage] = useState(true);
-  const [hideDownMenuCurrency, setHideDownMenuCurrency] = useState(true);
+  const [currency, setCurrency] = useState<string>("USD");
+  const [language, setLanguage] = useState<string>("ENG");
+  const [hideDownMenuLanguage, setHideDownMenuLanguage] =
+    useState<boolean>(true);
+  const [hideDownMenuCurrency, setHideDownMenuCurrency] =
+    useState<boolean>(true);
+
+  const [languageRef, currencyRef] = [
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+  ];
+
+  useEffect(() => {
+    const handleCloseMenu = (event: MouseEvent) => {
+      if (
+        !languageRef.current?.contains(event.target as Node) ||
+        !currencyRef.current?.contains(event.target as Node)
+      ) {
+        setHideDownMenuLanguage(true);
+        setHideDownMenuCurrency(true);
+      }
+    };
+    document.addEventListener("mousedown", handleCloseMenu);
+    return () => {
+      document.removeEventListener("mousedown", handleCloseMenu);
+    };
+  }, []);
 
   return (
     <Section>
@@ -47,7 +70,7 @@ const SocialMedia = () => {
             </LinksContainer>
           </SocialMediaContainer>
           <OptionsContainer>
-            <OptionContainer>
+            <OptionContainer ref={languageRef}>
               <span
                 onClick={() => setHideDownMenuLanguage(!hideDownMenuLanguage)}
               >
@@ -60,11 +83,12 @@ const SocialMedia = () => {
               <HideOptions
                 style={{ display: hideDownMenuLanguage ? "none" : "block" }}
               >
-                <UnorderList>
+                <UnorderList onMouseDown={(e) => e.stopPropagation()}>
                   {languages.map((language: string, index: number) => (
                     <List
                       key={index}
                       onClick={() => {
+                        console.log("hi");
                         setLanguage(language);
                         setHideDownMenuLanguage(true);
                       }}
@@ -75,7 +99,7 @@ const SocialMedia = () => {
                 </UnorderList>
               </HideOptions>
             </OptionContainer>
-            <OptionContainer>
+            <OptionContainer ref={currencyRef}>
               <span
                 onClick={() => setHideDownMenuCurrency(!hideDownMenuCurrency)}
               >
@@ -91,7 +115,7 @@ const SocialMedia = () => {
                   left: 0,
                 }}
               >
-                <UnorderList>
+                <UnorderList onMouseDown={(e) => e.stopPropagation()}>
                   {currencies.map((currency: string, index: number) => (
                     <List
                       key={index}
