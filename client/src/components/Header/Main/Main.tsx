@@ -13,7 +13,7 @@ import {
   HideMenu,
   HiddenSearch,
 } from "./Main.styled";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import ProfileMenu from "./Profile/ProfileMenu";
 import { Link } from "react-router-dom";
 export type ItemInterface = {
@@ -51,12 +51,12 @@ const Main = () => {
   const [showProfile, setShowProfile] = useState<Boolean>(false);
   const [showDorpDow, setShowDropDown] = useState<Boolean>(false);
   const [showSearchBar, setShowSearchBar] = useState<Boolean>(false);
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState<number>(window.innerWidth);
+  const [searchContent, setSearchContent] = useState<string>("");
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
-    console.log(width);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -72,7 +72,14 @@ const Main = () => {
         <Search
           style={{ display: showSearchBar || width > 768 ? "flex" : "none" }}
         >
-          <input type="text" placeholder="Search for anything..." />
+          <input
+            type="text"
+            placeholder="Search for anything..."
+            value={searchContent}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setSearchContent(e.target.value)
+            }
+          />
           {/* <img src="/assets/icons/MagnifyingGlass.svg" /> */}
         </Search>
 
@@ -83,7 +90,10 @@ const Main = () => {
                 ? "/assets/icons/XWhite.svg"
                 : "/assets/icons/MagnifyingGlassWhite.svg"
             }
-            onClick={() => setShowSearchBar(!showSearchBar)}
+            onClick={() => {
+              if (showDorpDow === false) setSearchContent("");
+              setShowSearchBar(!showSearchBar);
+            }}
           />
           <Menu>
             <img
