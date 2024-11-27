@@ -13,7 +13,7 @@ import {
   HideMenu,
   HiddenSearch,
 } from "./NavBar.styled";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, useRef } from "react";
 import ProfileMenu from "./Profile/ProfileMenu";
 import { Link } from "react-router-dom";
 export type ItemInterface = {
@@ -23,7 +23,7 @@ export type ItemInterface = {
   img: string;
 };
 
-const NavBar = () => {
+const NavBar: React.FC = () => {
   const itemObj: ItemInterface = {
     title: "Canon EOS 1500D DSLR Camera Body+ 18-55 mm",
     price: 1500,
@@ -54,10 +54,28 @@ const NavBar = () => {
   const [width, setWidth] = useState<number>(window.innerWidth);
   const [searchContent, setSearchContent] = useState<string>("");
 
+  const [cartRef, profileRef, menuRef] = [
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+  ];
+
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    const handleCloseitems = (e: any) => {
+      if (!cartRef.current?.contains(e.target as Node)) setShowCart(false);
+
+      if (!profileRef.current?.contains(e.target as Node))
+        setShowProfile(false);
+      if (!menuRef.current?.contains(e.target as Node)) setShowDropDown(false);
+    };
+    document.addEventListener("mousedown", handleCloseitems);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      document.removeEventListener("mousedown", handleCloseitems);
+    };
   }, []);
 
   return (
@@ -80,7 +98,6 @@ const NavBar = () => {
               setSearchContent(e.target.value)
             }
           />
-          {/* <img src="/assets/icons/MagnifyingGlass.svg" /> */}
         </Search>
 
         <User>
@@ -95,7 +112,7 @@ const NavBar = () => {
               setShowSearchBar(!showSearchBar);
             }}
           />
-          <Menu>
+          <Menu ref={menuRef}>
             <img
               src={
                 showDorpDow
@@ -125,7 +142,7 @@ const NavBar = () => {
               </ul>
             </HideMenu>
           </Menu>
-          <Cart>
+          <Cart ref={cartRef}>
             <img
               src="/assets/icons/Cart.svg"
               onClick={() => setShowCart(!showCart)}
@@ -145,7 +162,7 @@ const NavBar = () => {
               onClick={() => setShowFavorite(!showFavorite)}
             />
           </Favorite>
-          <Profile>
+          <Profile ref={profileRef}>
             <img
               src="/assets/icons/User.svg"
               onClick={() => setShowProfile(!showProfile)}

@@ -38,13 +38,10 @@ const SocialMedia: React.FC = () => {
 
   useEffect(() => {
     const handleCloseMenu = (event: MouseEvent) => {
-      if (
-        !languageRef.current?.contains(event.target as Node) ||
-        !currencyRef.current?.contains(event.target as Node)
-      ) {
+      if (!languageRef.current?.contains(event.target as Node))
         setHideDownMenuLanguage(true);
+      if (!currencyRef.current?.contains(event.target as Node))
         setHideDownMenuCurrency(true);
-      }
     };
     document.addEventListener("mousedown", handleCloseMenu);
     return () => {
