@@ -24,9 +24,11 @@ const SocialMedia: React.FC = () => {
   ];
   const currencies = ["MAD", "USD"];
   const languages = ["en", "fr"];
-
   const [currency, setCurrency] = useState<string>("USD");
-  const [language, setLanguage] = useState<string>("en");
+  const [language, setLanguage] = useState<string>(
+    localStorage?.getItem("lang") || "en"
+  );
+
   const [hideDownMenuLanguage, setHideDownMenuLanguage] =
     useState<boolean>(true);
   const [hideDownMenuCurrency, setHideDownMenuCurrency] =
@@ -92,6 +94,7 @@ const SocialMedia: React.FC = () => {
                       key={index}
                       onClick={() => {
                         setLanguage(language);
+                        localStorage.setItem("lang", language);
                         setHideDownMenuLanguage(true);
                         handleChangeLanguage(language);
                       }}

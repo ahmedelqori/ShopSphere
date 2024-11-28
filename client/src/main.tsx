@@ -15,7 +15,7 @@ import { I18nextProvider } from "react-i18next";
 
 i18next.init({
   interpolation: { escapeValue: true },
-  lng: "en",
+  lng: localStorage.getItem("lang")?.toString() || "en",
   resources: {
     en: {
       global: global_en,
