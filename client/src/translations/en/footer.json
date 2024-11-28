@@ -1,0 +1,33 @@
+{
+  "top_section": {
+    "first": {
+      "customer": "Customer Supports:"
+    },
+    "second": {
+      "title": "Top Category",
+      "computer": "Computer & Laptop",
+      "phone": "SmartPhone",
+      "headphone": "Headphone",
+      "accessories": "Accessories",
+      "camera": "Camera & Photo",
+      "tv": "TV & Homes",
+      "browser": "Browse All Product"
+    },
+    "third": {
+      "title": "Quick links",
+      "shop": "Quick links",
+      "shoping": "Shoping Cart",
+      "wishlist": "Wishlist",
+      "compare": "Compare",
+      "track": "Track Order",
+      "customer": "Customer Help",
+      "about": "About Us"
+    },
+    "fourth": {
+      "title": "Download APP"
+    },
+    "fifth": {
+      "title": "Popular Tag"
+    }
+  }
+}

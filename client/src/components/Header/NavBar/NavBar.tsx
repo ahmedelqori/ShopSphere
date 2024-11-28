@@ -94,6 +94,7 @@ const NavBar: React.FC = () => {
           style={{ display: showSearchBar || width > 768 ? "flex" : "none" }}
         >
           <input
+            style={{ color: "var(--color-grey)" }}
             ref={searchRef}
             type="text"
             placeholder={Content("navbar.input")}
@@ -150,7 +151,9 @@ const NavBar: React.FC = () => {
                   <Link to={"/"}>{Content("navbar.hide_profile.cart")}</Link>
                 </li>
                 <li>
-                  <Link to={"/"}>{Content("navbar.hide_profile.favorite")}</Link>
+                  <Link to={"/"}>
+                    {Content("navbar.hide_profile.favorite")}
+                  </Link>
                 </li>
               </ul>
             </HideMenu>

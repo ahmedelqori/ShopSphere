@@ -1,0 +1,33 @@
+{
+  "top_section": {
+    "first": {
+      "customer": "Support client :"
+    },
+    "second": {
+      "title": "Catégories",
+      "computer": "Ordinateur & Portable",
+      "phone": "Smartphone",
+      "headphone": "Casque audio",
+      "accessories": "Accessoires",
+      "camera": "Appareil photo & Photo",
+      "tv": "TV & Maison",
+      "browser": "Parcourir tous les produits"
+    },
+    "third": {
+      "title": "Liens rapides",
+      "shop": "Liens rapides",
+      "shoping": "Panier",
+      "wishlist": "Liste de souhaits",
+      "compare": "Comparer",
+      "track": "Suivre la commande",
+      "customer": "Aide client",
+      "about": "À propos de nous"
+    },
+    "fourth": {
+      "title": "Télécharger l'application"
+    },
+    "fifth": {
+      "title": "Tag populaire"
+    }
+  }
+}

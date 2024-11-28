@@ -8,8 +8,12 @@ import i18next from "i18next";
 
 import global_en from "./translations/en/global.json";
 import global_fr from "./translations/fr/global.json";
+
 import header_en from "./translations/en/header.json";
 import header_fr from "./translations/fr/header.json";
+
+import footer_en from "./translations/en/footer.json";
+import footer_fr from "./translations/fr/footer.json";
 
 import { I18nextProvider } from "react-i18next";
 
@@ -20,10 +24,12 @@ i18next.init({
     en: {
       global: global_en,
       header: header_en,
+      footer: footer_en,
     },
     fr: {
       global: global_fr,
       header: header_fr,
+      footer: footer_fr,
     },
   },
 });
