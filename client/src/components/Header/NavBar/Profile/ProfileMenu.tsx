@@ -52,6 +52,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
               src="/assets/icons/Eye.svg"
               alt="Show password"
               onClick={() => setShowPasssword(!showPassword)}
+            
             />
           </Password>
         </div>

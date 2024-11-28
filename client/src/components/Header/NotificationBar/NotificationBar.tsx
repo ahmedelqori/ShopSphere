@@ -29,7 +29,7 @@ const NotificationBar = () => {
         </CenterField>
         <RightSideButton>
           {Content("notification_bar.button").toUpperCase()}
-          <img src="/assets/icons/ArrowRight.svg" />
+          <img src="/assets/icons/ArrowRight.svg"  alt="arrow"/>
         </RightSideButton>
       </BarContainer>
       <CloseButton onClick={() => setIsClose(true)}>X</CloseButton>

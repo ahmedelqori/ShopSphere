@@ -62,7 +62,7 @@ const NavBar: React.FC = () => {
     useRef<HTMLInputElement>(null),
   ];
 
-  const [Content, i18n] = useTranslation("header");
+  const [Content, _] = useTranslation("header");
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -86,7 +86,7 @@ const NavBar: React.FC = () => {
       <Container className="container">
         <Logo style={{ display: showSearchBar ? "none" : "flex" }}>
           <a href="/">
-            <img src="/assets/icons/Icon.svg" />
+            <img src="/assets/icons/Icon.svg" alt="icon image" />
             <span>Meedivo</span>
           </a>
         </Logo>
@@ -111,6 +111,7 @@ const NavBar: React.FC = () => {
                 ? "/assets/icons/XWhite.svg"
                 : "/assets/icons/MagnifyingGlassWhite.svg"
             }
+            alt="close open"
             onClick={() => {
               if (showDorpDow === false) setSearchContent("");
               setShowSearchBar(!showSearchBar);
@@ -158,6 +159,7 @@ const NavBar: React.FC = () => {
             <img
               src="/assets/icons/Cart.svg"
               onClick={() => setShowCart(!showCart)}
+              alt="cart image"
             />
             <TotalItems onClick={() => setShowCart(!showCart)}>
               {items.length > 9 ? "+9" : items.length.toString()}
@@ -172,12 +174,14 @@ const NavBar: React.FC = () => {
             <img
               src="/assets/icons/Heart.svg"
               onClick={() => setShowFavorite(!showFavorite)}
+              alt="Favorite"
             />
           </Favorite>
           <Profile ref={profileRef}>
             <img
               src="/assets/icons/User.svg"
               onClick={() => setShowProfile(!showProfile)}
+              alt="User"
             />
             <ProfileMenu style={{ display: showProfile ? "flex" : "none" }} />
           </Profile>

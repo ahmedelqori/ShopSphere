@@ -52,7 +52,7 @@ export const Search = styled.div`
     font-weight: 400;
     font-size: 0.9rem;
     border-radius: 8px;
-    color: var(--color-grey-sky);
+    color: var(--color-grey-dark);
   }
   img {
     padding: 10px 10px;
@@ -157,7 +157,6 @@ export const TotalItems = styled.div`
   justify-content: center;
   color: var(--color-blue-dark);
   background-color: var(--color-white);
-
 `;
 export const Favorite = styled.div`
   width: 32px;

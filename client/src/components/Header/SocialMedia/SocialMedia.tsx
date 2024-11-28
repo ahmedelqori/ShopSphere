@@ -68,7 +68,7 @@ const SocialMedia: React.FC = () => {
               {socialMedia.map((e: string, index: number) => {
                 return (
                   <a key={index} href={`https://www.${e}.com`} target="_blank">
-                    <img src={`/assets/icons/${e}.svg`} />
+                    <img src={`/assets/icons/${e}.svg`} alt={e} />
                   </a>
                 );
               })}
@@ -84,6 +84,7 @@ const SocialMedia: React.FC = () => {
               <img
                 onClick={() => setHideDownMenuLanguage(!hideDownMenuLanguage)}
                 src="/assets/icons/CaretDown.svg"
+                alt="Caret Down"
               />
               <HideOptions
                 style={{ display: hideDownMenuLanguage ? "none" : "block" }}
@@ -114,6 +115,7 @@ const SocialMedia: React.FC = () => {
               <img
                 onClick={() => setHideDownMenuCurrency(!hideDownMenuCurrency)}
                 src="/assets/icons/CaretDown.svg"
+                alt="caret Down"
               />
               <HideOptions
                 style={{

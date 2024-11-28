@@ -1,5 +1,5 @@
 import { HeaderComp, Line } from "./Header.styled";
-import Main from "./NavBar/NavBar";
+import NavBar from "./NavBar/NavBar";
 import NotificationBar from "./NotificationBar/NotificationBar";
 import SocialMedia from "./SocialMedia/SocialMedia";
 
@@ -9,7 +9,7 @@ const Header = () => {
       <NotificationBar />
       <SocialMedia />
       <Line />
-      <Main />
+      <NavBar />
     </HeaderComp>
   );
 };
