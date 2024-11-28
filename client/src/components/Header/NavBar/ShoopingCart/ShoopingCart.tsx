@@ -19,7 +19,6 @@ import {
 
 import { ItemInterface } from "../NavBar";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 type ShoppingCartProps = {
   style?: React.CSSProperties;
