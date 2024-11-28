@@ -88,7 +88,7 @@ export const TopCategory = styled.div`
     }
   }
   @media (width <= 1320px) {
-    order: 1;
+    order: 2;
   }
 `;
 
@@ -173,7 +173,7 @@ export const PopularTag = styled.div`
     color: var(--color-white);
   }
   @media (width <= 1320px) {
-    order: 2;
+    order: 1;
   }
 `;
 
