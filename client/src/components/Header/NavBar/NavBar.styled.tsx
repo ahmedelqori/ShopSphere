@@ -7,6 +7,9 @@ export const Section = styled.nav`
   padding: 0px 5px;
   align-items: center;
   background-color: var(--color-blue-dark);
+  @media (width <= 768px) {
+    height:60px;
+  }
 `;
 
 export const Container = styled.div`

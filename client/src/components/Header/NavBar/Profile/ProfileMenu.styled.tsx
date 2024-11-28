@@ -11,6 +11,7 @@ export const ContainerForm = styled.div`
   color: var(--color-grey);
   background-color: var(--color-white);
   border: 1px solid var(--color-white-light);
+  z-index: 10;
 `;
 
 export const Form = styled.form`

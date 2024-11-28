@@ -36,5 +36,27 @@
       "cart": "Panier",
       "favorite": "Favoris"
     }
+  },
+  "shortbar": {
+    "list": {
+      "category": "Toutes les catégories",
+      "track": "Suivre la commande",
+      "compare": "Comparer",
+      "customer": "Service client",
+      "need": "Besoin d'aide"
+    },
+    "phone": "+1-202-555-0104"
+  },
+  "categories": {
+    "laptop": "Ordinateur & Portable",
+    "computer": "Accessoires pour ordinateur",
+    "smartPhone": "Smartphone",
+    "mobile": "Accessoires mobiles",
+    "console": "Console de jeu",
+    "camera": "Appareil photo & Photo",
+    "tv": "TV & Électroménager",
+    "watchs": "Montres & Accessoires",
+    "gps": "GPS & Navigation",
+    "warable": "Technologie portable"
   }
 }

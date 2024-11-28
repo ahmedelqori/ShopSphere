@@ -6,6 +6,8 @@ export const Cart = styled.div`
   top: 100%;
   right: 40px;
   width: 376px;
+  z-index: 5;
+  padding: 15px 0;
   font-size: 0.9rem;
   position: absolute;
   align-items: start;
@@ -14,7 +16,6 @@ export const Cart = styled.div`
   color: var(--color-grey);
   background-color: var(--color-white);
   border: 1px solid var(--color-white-light);
-  padding: 15px 0;
 `;
 
 export const H3 = styled.h3`

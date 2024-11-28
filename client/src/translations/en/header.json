@@ -36,5 +36,27 @@
       "cart": "Cart",
       "favorite": "Favorite"
     }
+  },
+  "shortbar": {
+    "list": {
+      "category": "All Category",
+      "track": "Track Order",
+      "compare": "Compare",
+      "customer": "Customer Support",
+      "need": "Need Help"
+    },
+    "phone": "+1-202-555-0104"
+  },
+  "categories": {
+    "laptop": "Computer & Laptop",
+    "computer": "Computer Accessories",
+    "smartPhone": "SmartPhone",
+    "mobile": "Mobile Accessories",
+    "console": "Gaming Console",
+    "camera": "Camera & Photo",
+    "tv": "TV & Homes Appliances",
+    "watchs": "Watchs & Accessories",
+    "gps": "GPS & Navigation",
+    "warable": "Warable Technology"
   }
 }
