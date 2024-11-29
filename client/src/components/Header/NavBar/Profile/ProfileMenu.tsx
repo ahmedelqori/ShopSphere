@@ -2,10 +2,20 @@ import React, { ChangeEvent, useState } from "react";
 import { ContainerForm, Form, Password, Buttons } from "./ProfileMenu.styled";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { gql, useMutation } from "@apollo/client";
 
 interface ProfileMenuProps {
   style?: React.CSSProperties;
 }
+
+const LOGIN = gql`
+  mutation Login($email: String!, $password: String!) {
+    createUser(email: $email, password: $password) {
+      id
+      email
+    }
+  }
+`;
 
 const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
   const [email, setEmail] = useState<string>("");
@@ -13,8 +23,17 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
   const [showPassword, setShowPasssword] = useState<Boolean>(false);
   const [Content, _] = useTranslation("header");
 
+  const [login, { loading, error, data }] = useMutation(LOGIN);
+
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
+    login({ variables: { email, password } })
+      .then(() => {
+        console.log("Login successful:", data);
+      })
+      .catch((err) => {
+        console.error("Error during login:", err);
+      });
   };
   return (
     <ContainerForm style={style}>
@@ -52,7 +71,6 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
               src="/assets/icons/Eye.svg"
               alt="Show password"
               onClick={() => setShowPasssword(!showPassword)}
-            
             />
           </Password>
         </div>
