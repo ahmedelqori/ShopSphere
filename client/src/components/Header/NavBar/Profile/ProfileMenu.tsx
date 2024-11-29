@@ -20,7 +20,6 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPasssword] = useState<Boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const [Content, _] = useTranslation("header");
 
@@ -29,22 +28,20 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
 
   const handleSubmit = async (e: React.SyntheticEvent): Promise<void> => {
     e.preventDefault();
-    setErrorMessage(null);
     try {
       await login({ variables: { email, password } });
-      console.log("hiii")
-      localStorage.setItem("_id", data.createUser.id);
     } catch (err: any) {
-      setErrorMessage(err.message);
       setPassword("");
       passwordRef?.current?.focus();
     }
   };
 
   useEffect(() => {
-    console.log(data);
-    console.log(errorMessage);
-  }, [errorMessage]);
+    console.log(error?.message)
+    if (data) {
+      localStorage.setItem("_id", data.createUser.id);
+    }
+  }, [error, data]);
 
   return (
     <ContainerForm style={style}>

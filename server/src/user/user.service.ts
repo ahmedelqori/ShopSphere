@@ -24,13 +24,12 @@ export class UserService {
       });
       if (findUser) {
         throw new GraphQLError('This email already used', {
-          extensions: { code: '409' },
+          extensions: { code: 409 },
         });
       }
-      const hashedPassword = await bcrypt.hash(userData.password, 10);
       const newUser = this.userRepository.create({
         email: userData.email,
-        password: hashedPassword,
+        password: userData.password,
       });
       await this.userRepository.save(newUser);
       return newUser;
