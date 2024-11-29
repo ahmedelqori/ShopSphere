@@ -1,0 +1,17 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int
+  email: String
+  password: String
+}
+
+type Query {
+  getUser: [User!]
+}
+
+type Mutation {
+  createUser(email: String!, password: String!): User
+}
