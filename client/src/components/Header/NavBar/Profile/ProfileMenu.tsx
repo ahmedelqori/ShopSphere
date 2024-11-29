@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ContainerForm, Form, Password, Buttons } from "./ProfileMenu.styled";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -10,9 +10,8 @@ interface ProfileMenuProps {
 
 const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
-    createUser(email: $email, password: $password) {
+    createUser(user: { email: $email, password: $password }) {
       id
-      email
     }
   }
 `;
@@ -21,23 +20,35 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPasssword] = useState<Boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const [Content, _] = useTranslation("header");
 
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [login, { loading, error, data }] = useMutation(LOGIN);
 
-  const handleSubmit = (e: React.SyntheticEvent): void => {
+  const handleSubmit = async (e: React.SyntheticEvent): Promise<void> => {
     e.preventDefault();
-    login({ variables: { email, password } })
-      .then(() => {
-        console.log("Login successful:", data);
-      })
-      .catch((err) => {
-        console.error("Error during login:", err);
-      });
+    setErrorMessage(null);
+    try {
+      await login({ variables: { email, password } });
+      console.log("hiii")
+      localStorage.setItem("_id", data.createUser.id);
+    } catch (err: any) {
+      setErrorMessage(err.message);
+      setPassword("");
+      passwordRef?.current?.focus();
+    }
   };
+
+  useEffect(() => {
+    console.log(data);
+    console.log(errorMessage);
+  }, [errorMessage]);
+
   return (
     <ContainerForm style={style}>
-      <Form onSubmit={(e: React.SyntheticEvent) => handleSubmit(e)}>
+      <Form onSubmit={handleSubmit}>
         <h3>{Content("navbar.profile.signin")}</h3>
         <div>
           <label htmlFor="email">{Content("navbar.profile.email")}</label>
@@ -48,6 +59,12 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
             }
+            style={{
+              outline: error
+                ? "1px solid var(--color-error)"
+                : "1px solid var(--color-white-light)",
+              borderRadius: "2px",
+            }}
           />
         </div>
         <div>
@@ -66,6 +83,13 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)
               }
+              style={{
+                outline: error
+                  ? "1px solid var(--color-error)"
+                  : "1px solid var(--color-white-light)",
+                borderRadius: "2px",
+              }}
+              ref={passwordRef}
             />
             <img
               src="/assets/icons/Eye.svg"
@@ -75,7 +99,9 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
           </Password>
         </div>
         <Buttons>
-          <button type="submit">{Content("navbar.profile.login")}</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "LOGGIN" : Content("navbar.profile.login")}
+          </button>
           <p>{Content("navbar.profile.no_account")}</p>
           <Link to={"/login"}>
             <button>{Content("navbar.profile.create_account")}</button>
