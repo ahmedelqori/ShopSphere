@@ -2,6 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: Int
+  email: String
+  password: String
+}
+
 type Query {
-  returnNumber: Int!
+  getUser: [User!]
+}
+
+type Mutation {
+  createUser(email: String!, password: String!): User
+  deleteUser(email: String!, password: String!): User
 }
