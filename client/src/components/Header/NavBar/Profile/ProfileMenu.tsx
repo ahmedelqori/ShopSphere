@@ -3,6 +3,7 @@ import { ContainerForm, Form, Password, Buttons } from "./ProfileMenu.styled";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { gql, useMutation } from "@apollo/client";
+import { toast } from "sonner";
 
 interface ProfileMenuProps {
   style?: React.CSSProperties;
@@ -30,18 +31,16 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
     e.preventDefault();
     try {
       await login({ variables: { email, password } });
+      toast.success("Login successful!", { richColors: true });
+      localStorage.setItem("_id", data.createUser.id);
     } catch (err: any) {
       setPassword("");
       passwordRef?.current?.focus();
+      toast.error("Email Or Password is incorrect", { richColors: true });
     }
   };
 
-  useEffect(() => {
-    console.log(error?.message)
-    if (data) {
-      localStorage.setItem("_id", data.createUser.id);
-    }
-  }, [error, data]);
+  useEffect(() => {}, [error, data]);
 
   return (
     <ContainerForm style={style}>
@@ -56,12 +55,6 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
             }
-            style={{
-              outline: error
-                ? "1px solid var(--color-error)"
-                : "1px solid var(--color-white-light)",
-              borderRadius: "2px",
-            }}
           />
         </div>
         <div>
@@ -80,12 +73,6 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)
               }
-              style={{
-                outline: error
-                  ? "1px solid var(--color-error)"
-                  : "1px solid var(--color-white-light)",
-                borderRadius: "2px",
-              }}
               ref={passwordRef}
             />
             <img
