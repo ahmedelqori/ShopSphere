@@ -1,32 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { UserEntity } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
-import { CreateUser } from './dto/CreateUser.dto';
+import { User } from './model/user.model';
+import { Injectable } from '@nestjs/common';
+import { CreateUser } from './dto/user.dto';
 import { GraphQLError } from 'graphql';
-import * as bcrypt from 'bcrypt';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
+    @InjectRepository(UserEntity)
+    protected userRepository: Repository<UserEntity>,
   ) {}
 
   async findAll(): Promise<User[]> | null {
     return await this.userRepository.find();
   }
 
-  async create(userData: CreateUser): Promise<User> {
+  async findUserByEmail(email: string): Promise<UserEntity> | null {
+    return await this.userRepository.findOneBy({ email });
+  }
+
+  async createUser(userData: CreateUser): Promise<UserEntity> | null {
     try {
-      const findUser = await this.userRepository.findOneBy({
-        email: userData.email,
-      });
-      if (findUser) {
-        throw new GraphQLError('This email already used', {
-          extensions: { code: 409 },
-        });
-      }
       const newUser = this.userRepository.create({
         email: userData.email,
         password: userData.password,
@@ -35,7 +31,7 @@ export class UserService {
       return newUser;
     } catch (err) {
       throw new GraphQLError(err.message, {
-        extensions: { code: err.extensions.code },
+        extensions: { code: err?.extensions?.code },
       });
     }
   }

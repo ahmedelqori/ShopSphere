@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { join } from 'path';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { GraphQLError, GraphQLFormattedError } from 'graphql';
       synchronize: true,
     }),
     UserModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

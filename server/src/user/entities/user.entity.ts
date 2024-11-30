@@ -1,21 +1,46 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { IsEmail, MinLength } from 'class-validator';
 
-@ObjectType()
 @Entity()
-export class User {
-  @Field(() => Int, { nullable: true })
+export class UserEntity {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Field({ nullable: true })
   @Column({ unique: true })
-  @IsEmail()
   email: string;
 
-  @Field({ nullable: true })
-  @MinLength(8)
   @Column()
   password: string;
+
+  @Column({ nullable: true })
+  avatar?: string;
+
+  @Column({ nullable: true })
+  displayName?: string;
+
+  @Column({ nullable: true })
+  username?: string;
+
+  @Column({ nullable: true })
+  fullName?: string;
+
+  @Column({ nullable: true })
+  secondaryEmail?: string;
+
+  @Column({ nullable: true })
+  phoneNumber?: string;
+
+  @Column({ nullable: true })
+  country?: string;
+
+  @Column({ nullable: true })
+  state?: string;
+
+  @Column({ nullable: true })
+  zip?: number;
+
+  @Column({ nullable: true })
+  verifiedEmail?: boolean;
+
+  @Column({ nullable: true })
+  verifiedPhoneNumber?: boolean;
 }
