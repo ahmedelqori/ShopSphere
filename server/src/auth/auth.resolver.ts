@@ -1,7 +1,7 @@
 import { Args, Mutation, Resolver, Context } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto/auth.dto';
-import { Auth } from './model/auth.model';
+import { Auth, AuthAccessToken } from './model/auth.model';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from './guards/auth.guard';
 import { GqlRefreshAuthGuard } from './guards/auth-refresh.guard';
@@ -12,20 +12,36 @@ export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Public()
-  @Mutation(() => Auth, { nullable: true })
-  async register(@Args('user') user: RegisterDto): Promise<Auth> {
+  @Mutation(() => AuthAccessToken, { nullable: true })
+  async register(
+    @Context() context: any,
+    @Args('user') user: RegisterDto,
+  ): Promise<AuthAccessToken> {
     try {
-      return await this.authService.register(user);
+      const tokens = await this.authService.register(user);
+      await this.authService.storeRefreshTokenInCookies(
+        context,
+        tokens.refreshToken,
+      );
+      return { accessToken: tokens.accessToken };
     } catch (err) {
       throw err;
     }
   }
 
   @Public()
-  @Mutation(() => Auth, { nullable: true })
-  async login(@Args('user') user: LoginDto): Promise<Auth> {
+  @Mutation(() => AuthAccessToken, { nullable: true })
+  async login(
+    @Context() context: any,
+    @Args('user') user: LoginDto,
+  ): Promise<AuthAccessToken> {
     try {
-      return await this.authService.login(user);
+      const tokens = await this.authService.login(user);
+      await this.authService.storeRefreshTokenInCookies(
+        context,
+        tokens.refreshToken,
+      );
+      return { accessToken: tokens.accessToken };
     } catch (error) {
       throw error;
     }
@@ -38,13 +54,18 @@ export class AuthResolver {
     await this.authService.logout(user.email);
     return true;
   }
-  
+
   @Public()
   @UseGuards(GqlRefreshAuthGuard)
-  @Mutation(() => Auth, { nullable: true })
-  async refreshToken(@Context() context: any): Promise<Auth> {
+  @Mutation(() => AuthAccessToken, { nullable: true })
+  async refreshToken(@Context() context: any): Promise<AuthAccessToken> {
     const req = context.req;
     const user = req.user;
-    return await this.authService.refreshTokens(user.email, user.refreshToken);
+    const tokens = await this.authService.refreshTokens(
+      user.email,
+      user.refreshToken,
+    );
+    this.authService.storeRefreshTokenInCookies(context, tokens.refreshToken);
+    return { accessToken: tokens.accessToken };
   }
 }

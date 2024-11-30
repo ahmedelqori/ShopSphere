@@ -2,9 +2,8 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Auth {
+type AuthAccessToken {
   accessToken: String!
-  refreshToken: String!
 }
 
 type Query {
@@ -12,10 +11,10 @@ type Query {
 }
 
 type Mutation {
-  register(user: RegisterDto!): Auth
-  login(user: LoginDto!): Auth
+  register(user: RegisterDto!): AuthAccessToken
+  login(user: LoginDto!): AuthAccessToken
   logout: Boolean
-  refreshToken: Auth
+  refreshToken: AuthAccessToken
 }
 
 input RegisterDto {

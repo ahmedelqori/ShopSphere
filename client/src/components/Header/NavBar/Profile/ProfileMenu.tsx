@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import { ContainerForm, Form, Password, Buttons } from "./ProfileMenu.styled";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,9 @@ interface ProfileMenuProps {
 const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     login(user: { email: $email, password: $password })
+  {
+    accessToken  
+  }
   }
 `;
 
@@ -37,7 +40,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
       setTimeout(() => {
         toast.dismiss();
         console.log(data);
-        toast.success(data?.login || "Login Success");
+        toast.success("Login Success");
       }, 1000);
     } catch (err: any) {
       setTimeout(() => {

@@ -7,3 +7,9 @@ export class Auth {
   @Field()
   refreshToken: string;
 }
+
+@ObjectType()
+export class AuthAccessToken {
+  @Field()
+  accessToken: string;
+}

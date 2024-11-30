@@ -15,6 +15,8 @@ import { JwtModule } from '@nestjs/jwt';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: true,
+      context: ({ req, res }) => ({ req, res }),
+
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       formatError: (error: GraphQLError): GraphQLFormattedError => {
         const graphQLFormattedError: GraphQLFormattedError = {
