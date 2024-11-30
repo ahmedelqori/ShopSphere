@@ -25,23 +25,27 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
   const [Content, _] = useTranslation("header");
 
   const passwordRef = useRef<HTMLInputElement>(null);
-  const [login, { loading, error, data }] = useMutation(LOGIN);
 
+  const [login, { loading, error, data }] = useMutation(LOGIN);
   const handleSubmit = async (e: React.SyntheticEvent): Promise<void> => {
     e.preventDefault();
     try {
       await login({ variables: { email, password } });
-      toast.success("Login successful!", { richColors: true });
       localStorage.setItem("_id", data.createUser.id);
+      toast.success("Login successful!", { richColors: true });
     } catch (err: any) {
-      setPassword("");
-      passwordRef?.current?.focus();
-      toast.error("Email Or Password is incorrect", { richColors: true });
+      if (error)
+        toast.error("Email Or Password is incorrect", { richColors: true });
     }
   };
 
-  useEffect(() => {}, [error, data]);
-
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      setPassword("");
+      passwordRef?.current?.focus();
+    }
+  }, [error, data]);
   return (
     <ContainerForm style={style}>
       <Form onSubmit={handleSubmit}>
@@ -83,9 +87,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
           </Password>
         </div>
         <Buttons>
-          <button type="submit" disabled={loading}>
-            {loading ? "LOGGIN" : Content("navbar.profile.login")}
-          </button>
+          <button type="submit">{Content("navbar.profile.login")}</button>
           <p>{Content("navbar.profile.no_account")}</p>
           <Link to={"/login"}>
             <button>{Content("navbar.profile.create_account")}</button>
