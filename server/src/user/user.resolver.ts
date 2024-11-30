@@ -1,21 +1,23 @@
-import { Resolver, Query} from '@nestjs/graphql';
+import { Resolver, Query } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './model/user.model';
 
 @Resolver(() => User)
 export class UserResolver {
+  /**
+   * @constructor
+   * @param {UserService} userService
+   */
   constructor(private readonly userService: UserService) {}
 
-  @Query(() => [User], { nullable: true })
+  /**
+   * Get Users From data base
+   *
+   * @async
+   * @returns {Boolean}
+   */
+  @Query(() => Boolean)
   async getUser() {
-    return await this.userService.findAll();
+    return true;
   }
-  // @Mutation(() => User, { nullable: true })
-  // async createUser(@Args('user') user: CreateUser) {
-  //   try {
-  //     return await this.userService.createUser(user);
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
 }

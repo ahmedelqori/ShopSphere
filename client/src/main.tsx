@@ -37,7 +37,7 @@ i18next.init({
 });
 
 const client = new ApolloClient({
-  uri: "http://localhost:1337/graphql",
+  uri: "http://192.168.100.19:1337/graphql",
   cache: new InMemoryCache(),
 });
 
@@ -46,7 +46,7 @@ createRoot(document.getElementById("root")!).render(
     <I18nextProvider i18n={i18next}>
       <ApolloProvider client={client}>
         <BrowserRouter>
-          <Toaster position="bottom-right" />
+          <Toaster position="top-center" richColors />
           <App />
         </BrowserRouter>
       </ApolloProvider>
