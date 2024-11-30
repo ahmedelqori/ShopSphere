@@ -8,19 +8,46 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
+  /**
+   * Creates an instance of UserService.
+   *
+   * @constructor
+   * @param {Repository<UserEntity>} userRepository
+   */
   constructor(
     @InjectRepository(UserEntity)
     protected userRepository: Repository<UserEntity>,
   ) {}
 
+  /**
+   * @description get all users with all data
+   *
+   * @async
+   * @param {void}
+   * @returns {(Promise<User[]> | null)}
+   */
   async findAll(): Promise<User[]> | null {
     return await this.userRepository.find();
   }
 
+  /**
+   * @description Find user by id
+   *
+   * @async
+   * @param {string} email
+   * @returns {(Promise<UserEntity> | null)}
+   */
   async findUserByEmail(email: string): Promise<UserEntity> | null {
     return await this.userRepository.findOneBy({ email });
   }
 
+  /**
+   * @description Create User
+   *
+   * @async
+   * @param {CreateUser} userData
+   * @returns {(Promise<UserEntity> | null)}
+   */
   async createUser(userData: CreateUser): Promise<UserEntity> | null {
     try {
       const newUser = this.userRepository.create({

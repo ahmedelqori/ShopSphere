@@ -11,41 +11,44 @@ interface ProfileMenuProps {
 
 const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
-    createUser(user: { email: $email, password: $password }) {
-      id
-    }
+    login(user: { email: $email, password: $password })
   }
 `;
 
 const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
+  const [login, { loading, error, data }] = useMutation(LOGIN);
+
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const [Content, _] = useTranslation("header");
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPasssword] = useState<Boolean>(false);
 
-  const [Content, _] = useTranslation("header");
-
-  const passwordRef = useRef<HTMLInputElement>(null);
-
-  const [login, { loading, error, data }] = useMutation(LOGIN);
   const handleSubmit = async (e: React.SyntheticEvent): Promise<void> => {
     e.preventDefault();
     try {
+      if (!email || !password || email.length === 0 || password.length === 0)
+        throw { message: "Please complete all fields." };
+      toast.loading("Loading");
       await login({ variables: { email, password } });
-      localStorage.setItem("_id", data.createUser.id);
-      toast.success("Login successful!", { richColors: true });
+      while (loading === true);
+      setTimeout(() => {
+        toast.dismiss();
+        console.log(data);
+        toast.success(data?.login || "Login Success");
+      }, 1000);
     } catch (err: any) {
-      if (error)
-        toast.error("Email Or Password is incorrect", { richColors: true });
+      setTimeout(() => {
+        toast.dismiss();
+        setPassword("");
+        console.log(err, loading, error);
+        passwordRef?.current?.focus();
+        toast.error(err?.message);
+      }, 1000);
     }
   };
-
-  useEffect(() => {
-    if (error) {
-      console.log(error);
-      setPassword("");
-      passwordRef?.current?.focus();
-    }
-  }, [error, data]);
   return (
     <ContainerForm style={style}>
       <Form onSubmit={handleSubmit}>
@@ -71,9 +74,9 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
           <Password>
             <input
               id="password"
-              type={showPassword ? "text" : "password"}
               name="password"
               value={password}
+              type={showPassword ? "text" : "password"}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)
               }

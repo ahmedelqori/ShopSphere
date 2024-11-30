@@ -2,25 +2,8 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
-  id: Int
-  email: String
-  password: String
-  avatar: String
-  displayName: String
-  username: String
-  fullName: String
-  secondaryEmail: String
-  phoneNumber: String
-  country: String
-  state: String
-  zip: Int
-  verifiedEmail: Boolean
-  verifiedPhoneNumber: Boolean
-}
-
 type Query {
-  getUser: [User!]
+  getUser: Boolean!
 }
 
 type Mutation {
