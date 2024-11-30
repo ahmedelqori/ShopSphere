@@ -6,6 +6,17 @@ type User {
   id: Int
   email: String
   password: String
+  avatar: String
+  displayName: String
+  username: String
+  fullName: String
+  secondaryEmail: String
+  phoneNumber: String
+  country: String
+  state: String
+  zip: Int
+  verifiedEmail: Boolean
+  verifiedPhoneNumber: Boolean
 }
 
 type Query {
@@ -13,10 +24,17 @@ type Query {
 }
 
 type Mutation {
-  createUser(user: CreateUser!): User
+  register(user: RegisterDto!): String
+  login(user: LoginDto!): String
 }
 
-input CreateUser {
+input RegisterDto {
+  email: String!
+  password: String!
+  confirmPassword: String!
+}
+
+input LoginDto {
   email: String!
   password: String!
 }
