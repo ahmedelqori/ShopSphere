@@ -17,6 +17,7 @@ import footer_fr from "./translations/fr/footer.json";
 
 import { I18nextProvider } from "react-i18next";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { Toaster } from "sonner";
 
 i18next.init({
   interpolation: { escapeValue: true },
@@ -36,7 +37,7 @@ i18next.init({
 });
 
 const client = new ApolloClient({
-  uri: "http://localhost:1337/graphql", // Replace with your GraphQL API endpoint
+  uri: "http://localhost:1337/graphql",
   cache: new InMemoryCache(),
 });
 
@@ -45,6 +46,7 @@ createRoot(document.getElementById("root")!).render(
     <I18nextProvider i18n={i18next}>
       <ApolloProvider client={client}>
         <BrowserRouter>
+          <Toaster position="bottom-right" />
           <App />
         </BrowserRouter>
       </ApolloProvider>

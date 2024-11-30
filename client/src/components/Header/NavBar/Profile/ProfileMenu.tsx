@@ -3,6 +3,7 @@ import { ContainerForm, Form, Password, Buttons } from "./ProfileMenu.styled";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { gql, useMutation } from "@apollo/client";
+import { toast } from "sonner";
 
 interface ProfileMenuProps {
   style?: React.CSSProperties;
@@ -20,7 +21,6 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPasssword] = useState<Boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const [Content, _] = useTranslation("header");
 
@@ -29,22 +29,18 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
 
   const handleSubmit = async (e: React.SyntheticEvent): Promise<void> => {
     e.preventDefault();
-    setErrorMessage(null);
     try {
       await login({ variables: { email, password } });
-      console.log("hiii")
+      toast.success("Login successful!", { richColors: true });
       localStorage.setItem("_id", data.createUser.id);
     } catch (err: any) {
-      setErrorMessage(err.message);
       setPassword("");
       passwordRef?.current?.focus();
+      toast.error("Email Or Password is incorrect", { richColors: true });
     }
   };
 
-  useEffect(() => {
-    console.log(data);
-    console.log(errorMessage);
-  }, [errorMessage]);
+  useEffect(() => {}, [error, data]);
 
   return (
     <ContainerForm style={style}>
@@ -59,12 +55,6 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
             }
-            style={{
-              outline: error
-                ? "1px solid var(--color-error)"
-                : "1px solid var(--color-white-light)",
-              borderRadius: "2px",
-            }}
           />
         </div>
         <div>
@@ -83,12 +73,6 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setPassword(e.target.value)
               }
-              style={{
-                outline: error
-                  ? "1px solid var(--color-error)"
-                  : "1px solid var(--color-white-light)",
-                borderRadius: "2px",
-              }}
               ref={passwordRef}
             />
             <img
