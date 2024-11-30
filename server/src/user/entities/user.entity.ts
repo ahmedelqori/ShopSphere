@@ -43,4 +43,7 @@ export class UserEntity {
 
   @Column({ nullable: true })
   verifiedPhoneNumber?: boolean;
+
+  @Column({ nullable: true, default: null })
+  refreshToken?: string;
 }

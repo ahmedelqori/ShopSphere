@@ -7,6 +7,7 @@ import { Module } from '@nestjs/common';
 import { join } from 'path';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -38,6 +39,9 @@ import { AuthModule } from './auth/auth.module';
       database: 'meedivo',
       autoLoadEntities: true,
       synchronize: true,
+    }),
+    JwtModule.register({
+      global: true,
     }),
     UserModule,
     AuthModule,
