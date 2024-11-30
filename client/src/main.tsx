@@ -39,6 +39,7 @@ i18next.init({
 const client = new ApolloClient({
   uri: "http://192.168.100.19:1337/graphql",
   cache: new InMemoryCache(),
+  credentials:"include"
 });
 
 createRoot(document.getElementById("root")!).render(

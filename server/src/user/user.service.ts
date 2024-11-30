@@ -41,6 +41,14 @@ export class UserService {
     return await this.userRepository.findOneBy({ email });
   }
 
+  async findUserAndUpdate(payload: object, updatedata: object) {
+    await this.userRepository.update(payload, updatedata);
+  }
+
+  async findUserAndDeleteRefreshToken(email: string) {
+    await this.userRepository.update({ email }, { refreshToken: null });
+  }
+
   /**
    * @description Create User
    *

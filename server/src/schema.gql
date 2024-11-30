@@ -2,13 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AuthAccessToken {
+  accessToken: String!
+}
+
 type Query {
   getUser: Boolean!
 }
 
 type Mutation {
-  register(user: RegisterDto!): String
-  login(user: LoginDto!): String
+  register(user: RegisterDto!): AuthAccessToken
+  login(user: LoginDto!): AuthAccessToken
+  logout: Boolean
+  refreshToken: AuthAccessToken
 }
 
 input RegisterDto {
