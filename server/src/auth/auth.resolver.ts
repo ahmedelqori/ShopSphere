@@ -1,11 +1,10 @@
 import { Args, Mutation, Resolver, Context } from '@nestjs/graphql';
-import { AuthService } from './auth.service';
-import { LoginDto, RegisterDto } from './dto/auth.dto';
-import { Auth, AuthAccessToken } from './model/auth.model';
-import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from './guards/auth.guard';
 import { GqlRefreshAuthGuard } from './guards/auth-refresh.guard';
+import { LoginDto, RegisterDto } from './dto/auth.dto';
+import { AuthAccessToken } from './model/auth.model';
 import { Public } from './common/public.decorator';
+import { AuthService } from './auth.service';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver()
 export class AuthResolver {

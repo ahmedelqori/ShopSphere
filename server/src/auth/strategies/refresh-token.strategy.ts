@@ -11,20 +11,20 @@ export class RefreshTokenStragtey extends PassportStrategy(
 ) {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (req: Request) => {
+          return req?.cookies?.refreshToken;
+        },
+      ]),
       secretOrKey: process.env.REFRESH_TOKEN,
       passReqToCallback: true,
     });
   }
 
   validate(req: Request, payload: any) {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      throw new GraphQLError('Authorization header is invalid or missing', {
-        extensions: { code: 'UNAUTHENTICATED' },
-      });
-    }
-    const refreshToken = authHeader.split(' ')[1];
+    const cookies = req.cookies;
+
+    const refreshToken = cookies?.refreshToken
     if (!refreshToken) {
       throw new GraphQLError('Refresh token is missing', {
         extensions: { code: 'UNAUTHENTICATED' },

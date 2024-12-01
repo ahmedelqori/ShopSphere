@@ -2,25 +2,14 @@ import React, { ChangeEvent, useRef, useState } from "react";
 import { ContainerForm, Form, Password, Buttons } from "./ProfileMenu.styled";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { gql, useMutation } from "@apollo/client";
 import { toast } from "sonner";
+import apiClient from "../../../../hooks/api.hook";
 
 interface ProfileMenuProps {
   style?: React.CSSProperties;
 }
 
-const LOGIN = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(user: { email: $email, password: $password })
-  {
-    accessToken  
-  }
-  }
-`;
-
 const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
-  const [login, { loading, error, data }] = useMutation(LOGIN);
-
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const [Content, _] = useTranslation("header");
@@ -31,27 +20,63 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
 
   const handleSubmit = async (e: React.SyntheticEvent): Promise<void> => {
     e.preventDefault();
+
+    if (!email || !password) {
+      toast.error("Please complete all fields.");
+      return;
+    }
+
+    toast.loading("Loading...");
+
     try {
-      if (!email || !password || email.length === 0 || password.length === 0)
-        throw { message: "Please complete all fields." };
-      toast.loading("Loading");
-      await login({ variables: { email, password } });
-      while (loading === true);
-      setTimeout(() => {
+      // Send login request via apiClient
+      const { data } = await apiClient.post("", {
+        query: `
+          mutation Login($email: String!, $password: String!) {
+            login(user: { email: $email, password: $password }) {
+              accessToken
+            }
+          }
+        `,
+        variables: { email, password },
+      });
+
+      if (data?.data?.login?.accessToken) {
+        localStorage.setItem("accessToken", data.data.login.accessToken);
         toast.dismiss();
-        console.log(data);
         toast.success("Login Success");
-      }, 1000);
+      } else {
+        throw new Error("Login response does not contain an access token.");
+      }
     } catch (err: any) {
-      setTimeout(() => {
-        toast.dismiss();
-        setPassword("");
-        console.log(err, loading, error);
-        passwordRef?.current?.focus();
-        toast.error(err?.message);
-      }, 1000);
+      toast.dismiss();
+      setPassword("");
+      passwordRef?.current?.focus();
+      toast.error(err?.message || "An error occurred during login.");
+      console.error(err);
     }
   };
+
+  const handleGetUsers = async () => {
+    try {
+      const { data } = await apiClient.post("", {
+        query: `
+          query GetUser {
+            getUser
+          }
+        `,
+      });
+      if (data?.data?.getUser) {
+        console.log("Fetched Users:", data.data.getUser);
+        toast.success("Users fetched successfully.");
+      }
+
+      if (data?.errors) throw data.errors[0];
+    } catch (error: any) {
+      toast.error(error?.message || "Failed to fetch users.");
+    }
+  };
+
   return (
     <ContainerForm style={style}>
       <Form onSubmit={handleSubmit}>
@@ -100,6 +125,9 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
           </Link>
         </Buttons>
       </Form>
+      <button onClick={handleGetUsers}>
+        {Content("navbar.profile.create_account")}
+      </button>
     </ContainerForm>
   );
 };

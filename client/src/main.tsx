@@ -16,7 +16,6 @@ import footer_en from "./translations/en/footer.json";
 import footer_fr from "./translations/fr/footer.json";
 
 import { I18nextProvider } from "react-i18next";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Toaster } from "sonner";
 
 i18next.init({
@@ -36,21 +35,14 @@ i18next.init({
   },
 });
 
-const client = new ApolloClient({
-  uri: "http://192.168.100.19:1337/graphql",
-  cache: new InMemoryCache(),
-  credentials:"include"
-});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <I18nextProvider i18n={i18next}>
-      <ApolloProvider client={client}>
         <BrowserRouter>
           <Toaster position="top-center" richColors />
           <App />
         </BrowserRouter>
-      </ApolloProvider>
     </I18nextProvider>
   </StrictMode>
 );
