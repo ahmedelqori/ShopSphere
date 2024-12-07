@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 
 
-const apiClient = axios.create({
+const apiClient: AxiosInstance = axios.create({
   baseURL: "http://192.168.100.19:1337/graphql",
   withCredentials: true,
 });

@@ -29,7 +29,6 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ style }) => {
     toast.loading("Loading...");
 
     try {
-      // Send login request via apiClient
       const { data } = await apiClient.post("", {
         query: `
           mutation Login($email: String!, $password: String!) {
