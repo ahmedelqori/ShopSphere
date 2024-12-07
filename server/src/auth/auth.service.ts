@@ -119,7 +119,6 @@ export class AuthService {
         throw new GraphQLError('Access Denied', {
           extensions: { code: 403 },
         });
-      console.log(rfToken, user.refreshToken);
       const compare = rfToken === user.refreshToken;
       if (!compare)
         throw new GraphQLError('Access Denied', {
@@ -161,8 +160,9 @@ export class AuthService {
   async storeRefreshTokenInCookies(context: any, refreshToken: string) {
     context.res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: false,
       maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: 'strict',
     });
   }
 }
