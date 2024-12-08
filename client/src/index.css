@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Public Sans", sans-serif;
 }
 
 :root {
@@ -21,6 +22,7 @@
   --color-footer-one: #adb7bc;
   --color-footer-two: #929fa5;
   --color-error: #ff3333;
+  --color-button: #fa8232;
 }
 
 body {
